@@ -14,7 +14,31 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
-  ALTER TABLE "payload_locked_documents_rels" ADD COLUMN "comments_id" integer;
+  DO $$ BEGIN
+   ALTER TABLE "pages_blocks_cta" ADD COLUMN IF NOT EXISTS "simple_text_field" varchar;
+  EXCEPTION WHEN duplicate_column THEN
+   -- Do nothing, column already exists
+  END $$;
+
+  DO $$ BEGIN
+   ALTER TABLE "pages_blocks_cta" ADD COLUMN IF NOT EXISTS "preheading" varchar;
+  EXCEPTION WHEN duplicate_column THEN
+   -- Do nothing, column already exists
+  END $$;
+
+  DO $$ BEGIN
+   ALTER TABLE "_pages_v_blocks_cta" ADD COLUMN IF NOT EXISTS "simple_text_field" varchar;
+  EXCEPTION WHEN duplicate_column THEN
+   -- Do nothing, column already exists
+  END $$;
+
+  DO $$ BEGIN
+   ALTER TABLE "_pages_v_blocks_cta" ADD COLUMN IF NOT EXISTS "preheading" varchar;
+  EXCEPTION WHEN duplicate_column THEN
+   -- Do nothing, column already exists
+  END $$;
+
+  ALTER TABLE "payload_locked_documents_rels" ADD COLUMN IF NOT EXISTS "comments_id" integer;
   DO $$ BEGIN
    ALTER TABLE "comments" ADD CONSTRAINT "comments_post_id_posts_id_fk" FOREIGN KEY ("post_id") REFERENCES "public"."posts"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
@@ -40,5 +64,9 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
   ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_comments_fk";
   
   DROP INDEX IF EXISTS "payload_locked_documents_rels_comments_id_idx";
+  ALTER TABLE "pages_blocks_cta" DROP COLUMN IF EXISTS "simple_text_field";
+  ALTER TABLE "pages_blocks_cta" DROP COLUMN IF EXISTS "preheading";
+  ALTER TABLE "_pages_v_blocks_cta" DROP COLUMN IF EXISTS "simple_text_field";
+  ALTER TABLE "_pages_v_blocks_cta" DROP COLUMN IF EXISTS "preheading";
   ALTER TABLE "payload_locked_documents_rels" DROP COLUMN IF EXISTS "comments_id";`)
 }

@@ -1,5 +1,5 @@
 {
-  "id": "b77ee33f-1971-4215-9e6b-2e2eba2ecced",
+  "id": "21f8dc94-892e-409a-9d50-3e5289b7276c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -251,6 +251,18 @@
           "type": "varchar",
           "primaryKey": true,
           "notNull": true
+        },
+        "simple_text_field": {
+          "name": "simple_text_field",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "preheading": {
+          "name": "preheading",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
         },
         "rich_text": {
           "name": "rich_text",
@@ -1664,6 +1676,18 @@
           "type": "serial",
           "primaryKey": true,
           "notNull": true
+        },
+        "simple_text_field": {
+          "name": "simple_text_field",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "preheading": {
+          "name": "preheading",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
         },
         "rich_text": {
           "name": "rich_text",

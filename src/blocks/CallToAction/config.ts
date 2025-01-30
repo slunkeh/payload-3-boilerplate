@@ -14,9 +14,18 @@ export const CallToAction: Block = {
   interfaceName: 'CallToActionBlock',
   fields: [
     {
+      name: 'simpleTextField',
+      type: 'text',
+      label: 'Simple Text Field',
+    },
+    {
       name: 'preheading',
       type: 'text',
       label: 'Preheading',
+      required: true,
+      admin: {
+        condition: (_, siblingData) => siblingData.enablePreheading,
+      },
     },
     {
       name: 'richText',

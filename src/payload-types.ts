@@ -223,6 +223,7 @@ export interface Media {
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
+  simpleTextField?: string | null;
   preheading?: string | null;
   richText?: {
     root: {
@@ -823,6 +824,7 @@ export interface PagesSelect<T extends boolean = true> {
         cta?:
           | T
           | {
+              simpleTextField?: T;
               preheading?: T;
               richText?: T;
               links?:

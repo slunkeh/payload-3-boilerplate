@@ -64,6 +64,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
+    push: false,
   }),
   collections: [Pages, Posts, Media, Categories, Users, Comments],
   cors: [getServerSideURL()].filter(Boolean),
@@ -77,9 +78,9 @@ export default buildConfig({
       path: '/health',
       method: 'get',
       handler: async (req) => {
-        return new Response('OK', { status: 200 });
-      }
-    }
+        return new Response('OK', { status: 200 })
+      },
+    },
   ],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
