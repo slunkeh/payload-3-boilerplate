@@ -14,6 +14,11 @@ export const CallToAction: Block = {
   interfaceName: 'CallToActionBlock',
   fields: [
     {
+      name: 'preheading',
+      type: 'text',
+      label: 'Preheading',
+    },
+    {
       name: 'richText',
       type: 'richText',
       editor: lexicalEditor({
